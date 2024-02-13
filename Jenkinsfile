@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools {
-    maven3 "tired"
+    maven "maven3"
   }
   stages {
     stage('Checkout') {
