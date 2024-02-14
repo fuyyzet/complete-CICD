@@ -8,7 +8,8 @@
   stages {
     stage('Checkout') {
       steps {
-        docker {args ' ps'}
+        docker { image 'maven:3.8.4-openjdk-17'
+        args ' ps'}
         //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
       }
     }
