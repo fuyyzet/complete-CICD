@@ -8,7 +8,7 @@
   stages {
     stage('Checkout') {
       steps {
-        docker ' ps'
+        //sh 'ls -ltr'
         //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
       }
     }
