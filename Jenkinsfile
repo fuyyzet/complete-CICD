@@ -19,6 +19,16 @@
         sh 'cd spring && mvn clean package' 
       }
     }
+    stage('Static Code Analysis') {
+      environment {
+        SONAR_URL = "http://18.210.19.12/:9000"
+      }
+      steps {
+        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+          sh 'cd spring && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+        }
+      }
+    }
     
         
     
