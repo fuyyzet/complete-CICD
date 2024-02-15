@@ -2,7 +2,7 @@
   agent {
     docker {
       image 'maven:3.8.4-openjdk-17'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock  -v $(which docker):/usr/bin/docker' // mount Docker socket to access the host's Docker daemon
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
   stages {
@@ -37,8 +37,10 @@
       }
       steps {
         script {
-            sh 'cd spring && docker build -t ${DOCKER_IMAGE} .'
+            //sh 'cd spring && docker build -t ${DOCKER_IMAGE} .'
+            sh 'cd spring'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
+            def customImage = docker.build(DOCKER_IMAGE)
             docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
                 dockerImage.push()
             }
