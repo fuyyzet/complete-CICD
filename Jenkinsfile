@@ -2,7 +2,7 @@
   agent {
     docker {
       image 'maven:3.8.4-openjdk-17'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock  -v $(which docker):/usr/bin/docker' // mount Docker socket to access the host's Docker daemon
     }
   }
   stages {
@@ -21,7 +21,7 @@
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://100.25.117.3:9000"
+        SONAR_URL = "http://100.25.141.63:9000"
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
