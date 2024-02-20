@@ -1,10 +1,15 @@
   pipeline {
-  agent {
-    docker {
-      image 'maven:3.8.4-openjdk-17'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
-    }
-  }
+  agent Analysis
+  // {
+    //docker {
+    //  image 'maven:3.8.4-openjdk-17'
+     // args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+   // }
+  //}
+  //environment {
+   // DOCKERHUB_CREDENTIALS = credentials('Eyere-dockerhub')
+   // APP_NAME = "fuzzyet/amazon-clone"
+   // }
   stages {
     stage('Checkout') {
       steps {
@@ -32,7 +37,6 @@
     stage('Build and Push Docker Image') {
       environment {
         DOCKER_IMAGE = "fuzzyet/complete-cicd:${BUILD_NUMBER}"
-        // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
