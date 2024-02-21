@@ -1,38 +1,20 @@
   pipeline {
-  agent {
-    docker {
-      //image 'maven:3.8.4-openjdk-17'
-      image 'docker'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker
+  agent any
+  //{
+   // docker {
+     // image 'maven:3.8.4-openjdk-17'
+      //image 'docker'
+      //args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker
        //socket to access the host's Docker daemon
        
-    }
-  }
-  //environment {
-   // DOCKERHUB_CREDENTIALS = credentials('Eyere-dockerhub')
-   // APP_NAME = "fuzzyet/amazon-clone"
-   // }
+    //}
+  //}
+ 
   stages {
     stage('Checkout') {
       steps {
         sh 'echo passed'
         //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
-      }
-    }
-    stage('Build Image') {
-      environment {
-        DOCKER_IMAGE = "fuzzyet/complete-cicd:${BUILD_NUMBER}"
-        REGISTRY_CREDENTIALS = credentials('docker-cred')
-      }
-      steps {
-        script {
-            sh 'cd spring && docker build -t ${DOCKER_IMAGE} .'
-            sh 'echo ${REGISTRY_CREDENTIALS}'
-            def dockerImage = docker.image("${DOCKER_IMAGE}")
-            docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
-                dockerImage.push()
-            }
-        }
       }
     }
     stage('Build and Test') {
