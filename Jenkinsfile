@@ -1,11 +1,10 @@
   pipeline {
-  agent any
-  // {
-    //docker {
-    //  image 'maven:3.8.4-openjdk-17'
-     // args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
-   // }
-  //}
+  agent {
+    docker {
+      image 'maven:3.8.4-openjdk-17'
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker ubuntu' // mount Docker socket to access the host's Docker daemon
+    }
+  }
   //environment {
    // DOCKERHUB_CREDENTIALS = credentials('Eyere-dockerhub')
    // APP_NAME = "fuzzyet/amazon-clone"
@@ -26,7 +25,7 @@
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://18.206.207.126:9000"
+        SONAR_URL = "http://34.207.121.135:9000"
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
@@ -50,6 +49,5 @@
         }
       }
     }
-    
   }
-}
+  }
