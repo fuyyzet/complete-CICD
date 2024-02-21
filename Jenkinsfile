@@ -2,7 +2,7 @@
   agent {
     docker {
       image 'maven:3.8.4-openjdk-17'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker ubuntu' // mount Docker socket to access the host's Docker daemon
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker maven:3.8.4-openjdk-17' // mount Docker socket to access the host's Docker daemon
     }
   }
   //environment {
