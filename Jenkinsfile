@@ -2,7 +2,8 @@
   agent 
   {
     docker {
-      image 'maven:3.8.4-openjdk-17'
+      //image 'maven:3.8.4-openjdk-17'
+      image 'maven'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker' // mount Docker
        //socket to access the host's Docker daemon
        
