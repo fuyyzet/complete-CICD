@@ -2,7 +2,9 @@
   agent {
     docker {
       image 'maven:3.8.4-openjdk-17'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker' // mount Docker socket to access the host's Docker daemon
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker --privileged' // mount Docker
+       //socket to access the host's Docker daemon
+       
     }
   }
   //environment {
@@ -13,6 +15,7 @@
     stage('Checkout') {
       steps {
         sh 'echo passed'
+        sh 'apt update && apt install -y docker.io'
         //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
       }
     }
