@@ -19,7 +19,7 @@
         //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
       }
     }
-    stage('Build and Push Docker Image') {
+    stage('Build Image') {
       environment {
         DOCKER_IMAGE = "fuzzyet/complete-cicd:${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
